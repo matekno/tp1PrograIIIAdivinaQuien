@@ -12,7 +12,7 @@ enum Atributo {
 
 
 // El objetivo de esta clase es convertir un atributo de Personaje en una pregunta concreta booleana
-// Todas las preguntas posibles tienen que ser instanciadas, y es lo que el usuario va a invocar.
+// Todas las preguntas posibles tienen que ser instanciadas (.todasLasPreguntas()), y es lo que el usuario va a invocar.
 public class Pregunta {
 
 	private final Atributo atributo;
