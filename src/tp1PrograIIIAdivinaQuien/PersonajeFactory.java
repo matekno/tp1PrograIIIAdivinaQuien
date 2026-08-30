@@ -40,7 +40,7 @@ public class PersonajeFactory {
 	
 	public static List<Personaje> crearTableroInicial() {
 		List<Personaje> personajes = crearPersonajes();
-		// TODO: ordenar por genero. Aca podria meter Divide y conquer
+		// TODO: ordenar por genero. Aca podria meter Divide y conquer...
 		asignarIds(personajes);
 		return personajes;
 	}

@@ -46,4 +46,35 @@ public class Personaje {
 		this.id = id;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public ColorDePelo getColorDePelo() {
+		return colorDePelo;
+	}
+
+	public boolean tieneLentes() {
+		return tieneLentes;
+	}
+
+	public boolean esPelado() {
+		return esPelado;
+	}
+
+	public Genero getGenero() {
+		return genero;
+	}
+
+	public Religion getReligion() {
+		return religion;
+	}
+	
+	
+	
+
 }
