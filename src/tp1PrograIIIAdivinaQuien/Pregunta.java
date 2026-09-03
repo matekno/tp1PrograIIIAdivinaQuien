@@ -63,5 +63,10 @@ public class Pregunta {
 		return preguntas;
 	}
 	
+	@Override
+	public String toString() {
+		return this.texto;
+	}
+	
 
 }
