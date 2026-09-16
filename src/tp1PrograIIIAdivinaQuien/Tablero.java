@@ -10,12 +10,12 @@ public class Tablero {
 	private List<Personaje> candidatos;
 
 	public Tablero(List<Personaje> personajes) {
-		this.candidatos = personajes;
+		this.candidatos = new ArrayList<>(personajes);
 	}
 
-	// Este metodo descarta a todos los personajes que cumplen con la condicion de
-	// una pregunta (es el filtro mismo)
-	public void descartar(Pregunta pregunta, boolean respuesta) {
+	// Este metodo se queda con todos los personajes que cumplen con la condicion de
+	// una pregunta (es el filtro mismo). El resto se descarta.
+	public void descartarPorPregunta(Pregunta pregunta, boolean respuesta) {
 		List<Personaje> sobrevivientes = new ArrayList<>();
 		for (Personaje personaje : candidatos) {
 			if (pregunta.cumple(personaje) == respuesta) {
@@ -26,7 +26,20 @@ public class Tablero {
 	}
 
 	public List<Personaje> getCandidatos() {
-		return candidatos;
+		return this.candidatos;
+	}
+	
+	public Personaje buscarPorId(int id) {
+	    for (Personaje personaje : candidatos) {
+	        if (personaje.getId() == id) {
+	            return personaje;
+	        }
+	    }
+	    return null;
+	}
+
+	public void descartarPersonaje(int id) {
+	    candidatos.remove(buscarPorId(id));
 	}
 
 	@Override

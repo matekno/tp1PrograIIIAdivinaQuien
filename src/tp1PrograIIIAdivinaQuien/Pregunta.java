@@ -2,7 +2,6 @@ package tp1PrograIIIAdivinaQuien;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //Esto la verdad que es lo que se me ocurrio. Si se agregara un atributo al Personaje, habria que agregarlo aca.
 // TODO: Mejorar

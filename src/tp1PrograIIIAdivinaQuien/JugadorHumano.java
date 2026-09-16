@@ -14,9 +14,16 @@ public class JugadorHumano extends Jugador {
 	}
 
 	private int leerInt() {
-		return Integer.parseInt(scanner.nextLine());
+		while (true) {
+			try {
+				return Integer.parseInt(scanner.nextLine().trim());
+			} 
+			catch (NumberFormatException e) {
+				System.out.println("Escribi un numero.");
+			}
+		}
 	}
-	
+
 	@Override
 	public boolean quiereArriesgar() {
 		System.out.println(getTableroRival());
@@ -35,10 +42,10 @@ public class JugadorHumano extends Jugador {
 		for (int i = 0; i < preguntas.size(); i++) {
 			System.out.println(i + " - " + preguntas.get(i));
 		}
+		
 		System.out.println("Numero de pregunta:");
 		return preguntas.get(leerInt());
 	}
-
 
 	private Personaje buscarPorId(int id) {
 		for (Personaje personaje : getTableroRival().getCandidatos()) {
@@ -48,11 +55,18 @@ public class JugadorHumano extends Jugador {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public Personaje arriesgar() {
-		System.out.println("Id del personaje:");
-		return buscarPorId(leerInt());
+		Personaje elegido = null;
+		while (elegido == null) {
+			System.out.println("Id del personaje:");
+			elegido = buscarPorId(leerInt());
+			if (elegido == null) {
+				System.out.println("Ese id no esta entre los candidatos.");
+			}
+		}
+		return elegido;
 	}
 
 }

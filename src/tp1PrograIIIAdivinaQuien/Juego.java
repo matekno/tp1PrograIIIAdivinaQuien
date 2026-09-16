@@ -10,23 +10,23 @@ public class Juego {
 		Scanner scanner = new Scanner(System.in);
 		Random random = new Random();
 
-		List<Personaje> tableroDelHumano = PersonajeFactory.crearTableroInicial();
-		List<Personaje> tableroDeLaMaquina = PersonajeFactory.crearTableroInicial();
+		List<Personaje> elencoDelHumano = PersonajeFactory.crearTableroInicial();
+		List<Personaje> elencoDeLaMaquina = PersonajeFactory.crearTableroInicial();
 
 		System.out.println("Ingresa tu nombre:");
 		String nombre = scanner.nextLine();
 
-		for (Personaje personaje : tableroDelHumano) {
+		for (Personaje personaje : elencoDelHumano) {
 			System.out.println(personaje);
 		}
 		System.out.println("Id de tu personaje:");
 		int idElegido = Integer.parseInt(scanner.nextLine());
 
-		Personaje personajeSecretoDelHumano = tableroDelHumano.get(idElegido - 1);
-		Personaje personajeSecretoDeLaMaquina = tableroDeLaMaquina.get(random.nextInt(tableroDeLaMaquina.size()));
+		Personaje personajeSecretoDelHumano = elencoDelHumano.get(idElegido - 1);
+		Personaje personajeSecretoDeLaMaquina = elencoDeLaMaquina.get(random.nextInt(elencoDeLaMaquina.size()));
 
-		Jugador humano = new JugadorHumano(nombre, personajeSecretoDelHumano, new Tablero(tableroDelHumano), scanner);
-		Jugador maquina = new JugadorMaquina("Maquina", personajeSecretoDeLaMaquina, new Tablero(tableroDeLaMaquina),
+		Jugador humano = new JugadorHumano(nombre, personajeSecretoDelHumano, new Tablero(elencoDeLaMaquina), scanner);
+		Jugador maquina = new JugadorMaquina("Maquina", personajeSecretoDeLaMaquina, new Tablero(elencoDelHumano),
 				new EstrategiaRandom(3));
 
 		Jugador ganador = new Partida(humano, maquina).jugar();

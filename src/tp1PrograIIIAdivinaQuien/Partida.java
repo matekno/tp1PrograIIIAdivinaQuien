@@ -23,17 +23,33 @@ public class Partida {
 	}
 
 	private boolean jugarTurno(Jugador jugador, Jugador rival) {
+	    System.out.println();
+	    System.out.println("===== Turno de " + jugador.getNombre() + " =====");
 		if (jugador.quiereArriesgar()) {
 			Personaje apuesta = jugador.arriesgar();
-			System.out.println(jugador.getNombre() + " arriesga: " + apuesta.getNombre());
-			return rival.esMiPersonajeSecreto(apuesta);
+			boolean acerto = rival.esMiPersonajeSecreto(apuesta);
+			if (acerto == false) {
+	            jugador.getTableroRival().descartarPersonaje(apuesta.getId());
+	        }
+	        mostrarArriesgue(jugador, apuesta, acerto);
+	        return acerto;
 		}
 
 		Pregunta pregunta = jugador.elegirPregunta();
 		boolean respuesta = rival.responder(pregunta);
-		jugador.getTableroRival().descartar(pregunta, respuesta);
+		jugador.getTableroRival().descartarPorPregunta(pregunta, respuesta);
 		mostrarPregunta(jugador, pregunta, respuesta);
 		return false;
+	}
+	
+	private void mostrarArriesgue(Jugador jugador, Personaje apuesta, boolean acerto) {
+	    System.out.println(jugador.getNombre() + " arriesga: " + apuesta.getNombre());
+	    if (acerto) {
+	        System.out.println("Acerto.");
+	    } else {
+	        System.out.println("Erro. Se descarta a " + apuesta.getNombre() + " y pierde el turno.");
+	        mostrarCandidatos(jugador);
+	    }
 	}
 
 	private void mostrarPregunta(Jugador jugador, Pregunta pregunta, boolean respuesta) {
@@ -45,5 +61,12 @@ public class Partida {
 		}
 
 		System.out.println(jugador.getNombre() + " pregunta: " + pregunta + " -> " + respuestaTexto);
+		mostrarCandidatos(jugador);
 	}
+	
+	private void mostrarCandidatos(Jugador jugador) {
+	    int cantidad = jugador.getTableroRival().getCandidatos().size();
+	    System.out.println("A " + jugador.getNombre() + " le quedan " + cantidad + " candidatos.");
+	}
+	
 }
