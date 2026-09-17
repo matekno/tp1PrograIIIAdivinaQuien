@@ -26,13 +26,13 @@ public class Juego {
 		Personaje personajeSecretoDeLaMaquina = elencoDeLaMaquina.get(random.nextInt(elencoDeLaMaquina.size()));
 
 		Jugador humano = new JugadorHumano(nombre, personajeSecretoDelHumano, new Tablero(elencoDeLaMaquina), scanner);
+		// Jugador maquina = new JugadorMaquina("Maquina", personajeSecretoDeLaMaquina,
+		// new Tablero(elencoDelHumano), new EstrategiaRandom(3));
 		Jugador maquina = new JugadorMaquina("Maquina", personajeSecretoDeLaMaquina, new Tablero(elencoDelHumano),
-				new EstrategiaRandom(3));
+				new EstrategiaAcertiva(3));
 
 		Jugador ganador = new Partida(humano, maquina).jugar();
 		System.out.println("Gano " + ganador.getNombre());
 	}
 
-	
-	
 }
