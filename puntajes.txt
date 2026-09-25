@@ -1,0 +1,2 @@
+Maquina;2
+Mati;1
