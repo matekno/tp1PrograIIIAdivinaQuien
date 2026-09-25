@@ -4,14 +4,18 @@ import java.util.List;
 
 public class EstrategiaAcertiva implements Estrategia {
 	private final int umbral;
-	
+
 	public EstrategiaAcertiva(int umbral) {
 		this.umbral = umbral;
 	}
-	
+
 	@Override
 	public boolean debeArriesgar(Tablero tablero) { // Funcion Solucion. Cuando quedan n candidatos posibles.
-		return tablero.getCandidatos().size() <= umbral;
+		if (tablero.getCandidatos().size() <= umbral) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -22,20 +26,23 @@ public class EstrategiaAcertiva implements Estrategia {
 		for (Pregunta pregunta : disponibles) {
 			int siCumplen = cuantosCandidatosCumplenLaPregunta(tablero, pregunta);
 			int noCumplen = cantVivos - siCumplen;
-			
-			if(siCumplen > 0 && noCumplen > 0) { // Funcion de factibilidad. la pregunta parte al conjunto de candidatos en dos grupos no vacíos.
+
+			if (siCumplen > 0 && noCumplen > 0) { // Funcion de factibilidad. la pregunta parte al conjunto de
+													// candidatos en dos grupos no vacíos.
 
 				int cantVivosEnPeorCaso = Math.max(siCumplen, noCumplen); // Funcion de seleccion
-				if(cantVivosEnPeorCaso < menorCantDeVivosEnElPeorCaso) {
+				if (cantVivosEnPeorCaso < menorCantDeVivosEnElPeorCaso) {
 					menorCantDeVivosEnElPeorCaso = cantVivosEnPeorCaso;
 					mejorPregunta = pregunta;
 				}
 			}
 		}
+		reflexionar("Pregunto '" + mejorPregunta + "': en el peor caso me quedan " + menorCantDeVivosEnElPeorCaso
+				+ " de " + cantVivos + " candidatos.");
 		return mejorPregunta;
-		
+
 	}
-	
+
 	private int cuantosCandidatosCumplenLaPregunta(Tablero tablero, Pregunta pregunta) {
 		int cuenta = 0;
 		for (Personaje personaje : tablero.getCandidatos()) {

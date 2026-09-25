@@ -24,7 +24,9 @@ public class EstrategiaRandom implements Estrategia {
 	@Override
 	public Pregunta elegirPregunta(Tablero tablero, List<Pregunta> preguntasDisponibles) {
 		int i = random.nextInt(preguntasDisponibles.size());
-	    return preguntasDisponibles.get(i);
+	    Pregunta pregunta = preguntasDisponibles.get(i);
+	    reflexionar("Pregunto '" + pregunta + "', elegida al azar entre " + preguntasDisponibles.size() + " preguntas.");
+	    return pregunta;
 	}
 
 	@Override
